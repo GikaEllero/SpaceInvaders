@@ -23,16 +23,15 @@ public class Invader : MonoBehaviour
         
         _spriteRenderer.sprite = this.animationSprite[_animationFrame];
     }
+
+    public void OnTriggerEnter2D(Collider2D col){
+        if(col.gameObject.layer == LayerMask.NameToLayer("Laser"))
+            this.gameObject.SetActive(false);
+    }
     
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating(nameof(AnimateSprite), this.animationTime, this.animationTime);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

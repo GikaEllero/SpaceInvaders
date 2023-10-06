@@ -8,12 +8,10 @@ public class Invaders : MonoBehaviour
     public int linhas = 5;
     public int colunas = 11;    
     public Invader[] prefabs;
-    public float dist = 0.8f;
-    public float speed = 1.0f;
-    private Vector3 _direcao = Vector2.right;
-    public float direita = 4.0f;
-    public float esquerda = -4.0f;
-
+    public float dist = 0.7f;
+    public float speed = 0.7f;
+    private Vector3 _direcao = Vector3.right;
+    public float boundX = 6.0f;
 
     private void Awake(){
         for (int linha = 0; linha < this.linhas; linha++)
@@ -36,7 +34,7 @@ public class Invaders : MonoBehaviour
         _direcao.x *= -1;
 
         Vector3 position = this.transform.position;
-        position.y -= 1.0f;
+        position.y -= 0.5f;
         this.transform.position = position;
     }
 
@@ -56,10 +54,10 @@ public class Invaders : MonoBehaviour
             if(!invader.gameObject.activeInHierarchy)
                 continue;
 
-            if(_direcao == Vector3.right && invader.position.x >= direita){
+            if(_direcao == Vector3.right && invader.position.x >= boundX){
                 Avanca();
             }
-            else if(_direcao == Vector3.left && invader.position.x <= esquerda){
+            else if(_direcao == Vector3.left && invader.position.x <= -boundX){
                 Avanca();
             }
         }

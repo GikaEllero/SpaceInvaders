@@ -134,7 +134,8 @@ GameObject:
   - component: {fileID: 412441353}
   - component: {fileID: 412441352}
   - component: {fileID: 412441351}
-  m_Layer: 0
+  - component: {fileID: 412441354}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,6 +254,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &412441354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412441350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10dd39680d07abc4cbce7baa56da3e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserPrefab: {fileID: 1485781979956491423, guid: 5829e9861820e9b4abe440c3c2244fbe, type: 3}
+  boundX: 4
+  speed: 2.5
+  moveLeft: 276
+  moveRight: 275
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,7 +809,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1589027198}
   - component: {fileID: 1589027197}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Invaders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -820,8 +838,7 @@ MonoBehaviour:
   - {fileID: 7164638299837921286, guid: fd006984efe776541b5546b61d4d9880, type: 3}
   dist: 0.8
   speed: 1
-  direita: 4
-  esquerda: -4
+  boundX: 6
 --- !u!4 &1589027198
 Transform:
   m_ObjectHideFlags: 0
