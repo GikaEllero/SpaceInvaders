@@ -9,9 +9,15 @@ public class Invaders : MonoBehaviour
     public int colunas = 11;    
     public Invader[] prefabs;
     public float dist = 0.7f;
-    public float speed = 0.7f;
+    public AnimationCurve speed;
     private Vector3 _direcao = Vector3.right;
     public float boundX = 6.0f;
+    public int amountKilled {get; set;}
+    public int totalAlive => totalInvaders - amountKilled;
+    public int totalInvaders => linhas * colunas; 
+    public float percKilled => (float)amountKilled / (float)totalInvaders;
+    public float missilRate = 1.0f;
+    public Projetil missilPrefab;
 
     private void Awake(){
         for (int linha = 0; linha < this.linhas; linha++)
@@ -23,6 +29,7 @@ public class Invaders : MonoBehaviour
             for (int col = 0; col < this.colunas; col++)
             {
                 Invader invader = Instantiate(this.prefabs[linha], this.transform);
+                invader.killed += InvaderKilled;
                 Vector3 position = posicaoLinha;
                 position.x += col *  dist;
                 invader.transform.localPosition = position;
@@ -38,16 +45,33 @@ public class Invaders : MonoBehaviour
         this.transform.position = position;
     }
 
+    private void InvaderKilled(){
+        amountKilled++;
+    }
+
+    private void Missil(){
+        foreach (Transform invader in this.transform)
+        {
+            if(!invader.gameObject.activeInHierarchy)
+                continue;
+
+            if(Random.value < (1 / totalAlive)){
+                Instantiate(missilPrefab, invader.position, Quaternion.identity);
+                break;
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        InvokeRepeating(nameof(Missil), missilRate, missilRate);
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.transform.position += _direcao * this.speed * Time.deltaTime;
+        this.transform.position += _direcao * speed.Evaluate(percKilled) * Time.deltaTime;
 
         foreach (Transform invader in this.transform)
         {

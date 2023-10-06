@@ -9,7 +9,8 @@ public class Projetil : MonoBehaviour
     public System.Action destroyed;
 
     public void OnTriggerEnter2D(Collider2D col){
-        this.destroyed.Invoke();
+        if(destroyed != null)
+            this.destroyed.Invoke();
         Destroy(this.gameObject);
     }
 

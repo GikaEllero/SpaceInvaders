@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public Projetil laserPrefab;
     private bool _laserActive = false;
     public float boundX = 4.0f;
-    public float speed = 2.5f;
+    public float speed = 3.0f;
     public KeyCode moveLeft = KeyCode.LeftArrow;
     public KeyCode moveRight = KeyCode.RightArrow;
 
