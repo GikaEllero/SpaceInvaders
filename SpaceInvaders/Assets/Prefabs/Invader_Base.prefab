@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4438426583649890908}
   - component: {fileID: 536716595350096169}
   - component: {fileID: 2360864309923129741}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Invader_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,3 +145,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationSprite: []
   animationTime: 1
+  score: 10

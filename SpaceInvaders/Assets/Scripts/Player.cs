@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Player : MonoBehaviour
     public float speed = 3.0f;
     public KeyCode moveLeft = KeyCode.LeftArrow;
     public KeyCode moveRight = KeyCode.RightArrow;
-
+    
     public void Atirar()
     {
         if(!_laserActive){
@@ -25,15 +26,21 @@ public class Player : MonoBehaviour
         _laserActive = false;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public void OnTriggerEnter2D(Collider2D col){
+        if(col.gameObject.layer == LayerMask.NameToLayer("Invader"))
+            SceneManager.LoadScene("Lose");
+        else if(col.gameObject.layer == LayerMask.NameToLayer("Missil"))
+            GameManager.SetVidas();
+        
+    }
+
+    public void ResetPlayer(){
+    	transform.position = new Vector2(0f, -4.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-
     	if (Input.GetKey(moveRight))
         	transform.position += Vector3.right * speed * Time.deltaTime;
     	
@@ -51,6 +58,5 @@ public class Player : MonoBehaviour
 
     	if (Input.GetKeyDown(KeyCode.Space))
             Atirar();
-
     }
 }

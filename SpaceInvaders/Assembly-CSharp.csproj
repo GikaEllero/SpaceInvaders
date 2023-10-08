@@ -55,10 +55,14 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.2.0f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\MysteryShip.cs" />
     <Compile Include="Assets\Scripts\Invader.cs" />
+    <Compile Include="Assets\Scripts\TextUpdate.cs" />
     <Compile Include="Assets\Scripts\Projetil.cs" />
     <Compile Include="Assets\Scripts\Invaders.cs" />
+    <Compile Include="Assets\Scripts\Bunkers.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

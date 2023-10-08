@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class Invaders : MonoBehaviour
@@ -12,12 +14,13 @@ public class Invaders : MonoBehaviour
     public AnimationCurve speed;
     private Vector3 _direcao = Vector3.right;
     public float boundX = 6.0f;
-    public int amountKilled {get; set;}
-    public int totalAlive => totalInvaders - amountKilled;
+    public int amountKilled {get; private set;}
+    public int totalAlive => this.totalInvaders - this.amountKilled;
     public int totalInvaders => linhas * colunas; 
     public float percKilled => (float)amountKilled / (float)totalInvaders;
     public float missilRate = 1.0f;
     public Projetil missilPrefab;
+    public int score = 10;
 
     private void Awake(){
         for (int linha = 0; linha < this.linhas; linha++)
@@ -41,12 +44,17 @@ public class Invaders : MonoBehaviour
         _direcao.x *= -1;
 
         Vector3 position = this.transform.position;
-        position.y -= 0.5f;
+        position.y -= 0.25f;
         this.transform.position = position;
     }
 
     private void InvaderKilled(){
         amountKilled++;
+
+        if(amountKilled >= totalInvaders)
+            SceneManager.LoadScene("Win");
+
+        GameManager.SetScore(score);
     }
 
     private void Missil(){
@@ -55,7 +63,8 @@ public class Invaders : MonoBehaviour
             if(!invader.gameObject.activeInHierarchy)
                 continue;
 
-            if(Random.value < (1 / totalAlive)){
+            var valor = UnityEngine.Random.value;
+            if(valor < (1.0f / (float)totalAlive)){
                 Instantiate(missilPrefab, invader.position, Quaternion.identity);
                 break;
             }
@@ -65,7 +74,7 @@ public class Invaders : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating(nameof(Missil), missilRate, missilRate);
+        InvokeRepeating(nameof(Missil), this.missilRate, this.missilRate);
     }
 
     // Update is called once per frame
